@@ -1,13 +1,7 @@
 package tictactoe
 
 import (
-	"image/color"
-
 	"github.com/hajimehoshi/ebiten/v2"
-)
-
-var (
-	frameColor = color.RGBA{0xbb, 0xad, 0xa0, 0xff}
 )
 
 type Board struct {

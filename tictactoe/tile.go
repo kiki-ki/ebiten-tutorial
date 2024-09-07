@@ -43,11 +43,11 @@ func (t *Tile) isCircle() bool {
 func (t *Tile) color() color.Color {
 	switch {
 	case t.isEmpty():
-		return color.NRGBA{0xee, 0xe4, 0xda, 0x59}
+		return tileEmptyColor
 	case t.isCircle():
-		return color.RGBA{0xf9, 0xf6, 0xf2, 0xff}
+		return tileCircleColor
 	case t.isCross():
-		return color.RGBA{0xff, 0xf6, 0xf2, 0xff}
+		return tileCrossColor
 	}
 	panic("not reach")
 }

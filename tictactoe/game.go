@@ -1,8 +1,6 @@
 package tictactoe
 
 import (
-	"image/color"
-
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -11,10 +9,6 @@ const (
 	ScreenHeight = 600
 
 	boardLength = 3
-)
-
-var (
-	screenColor = color.RGBA{0xfa, 0xf8, 0xef, 0xff}
 )
 
 type Game struct {
