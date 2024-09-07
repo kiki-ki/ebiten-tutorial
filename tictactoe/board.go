@@ -54,16 +54,6 @@ func (b *Board) Draw() {
 	}
 }
 
-func (b *Board) DrawWin(winner *Player) {
-	opts := &ebiten.DrawImageOptions{}
-	opts.GeoM.Translate(float64(boardMaxX), float64(boardMaxY))
-
-	winImage := ebiten.NewImage(boardWidth, boardHeight)
-	winImage.Fill(symbolColor(winner.symbol))
-
-	b.image.DrawImage(winImage, opts)
-}
-
 func (b *Board) HasWinningLine() bool {
 	for i := 0; i < boardLength; i++ {
 		// Check row

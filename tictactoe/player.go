@@ -14,10 +14,6 @@ func NewPlayer(symbol symbol) *Player {
 	}
 }
 
-func (p *Player) DrawWin() {
-
-}
-
 func (p *Player) WinnerMsg() string {
 	return fmt.Sprintf("%s wins!", p.symbol)
 }

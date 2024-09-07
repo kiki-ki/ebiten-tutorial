@@ -1,8 +1,6 @@
 package tictactoe
 
 import (
-	"image/color"
-
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -28,7 +26,7 @@ func NewTile(symbol symbol) *Tile {
 }
 
 func (t *Tile) Draw() {
-	t.image.Fill(t.color())
+	t.image.Fill(symbolColor(t.symbol))
 }
 
 func (t *Tile) Mark(symbol symbol) {
@@ -45,8 +43,4 @@ func (t *Tile) IsCross() bool {
 
 func (t *Tile) IsCircle() bool {
 	return t.symbol == symbolCircle
-}
-
-func (t *Tile) color() color.Color {
-	return symbolColor(t.symbol)
 }
