@@ -22,13 +22,12 @@ type Board struct {
 }
 
 func NewBoard() *Board {
-	row := make([]*Tile, boardLength)
-	for i := range row {
-		row[i] = NewTile(tileEmpty)
-	}
 	tiles := make([][]*Tile, boardLength)
 	for i := range tiles {
-		tiles[i] = row
+		tiles[i] = make([]*Tile, boardLength)
+		for j := range tiles[i] {
+			tiles[i][j] = NewTile(tileEmpty)
+		}
 	}
 	board := &Board{
 		tiles: tiles,

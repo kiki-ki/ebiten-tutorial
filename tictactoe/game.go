@@ -82,6 +82,7 @@ func (g *Game) changePlayer() {
 	for _, player := range g.players {
 		if g.currentPlayer.symbol != player.symbol {
 			g.currentPlayer = player
+			return
 		}
 	}
 }
