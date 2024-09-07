@@ -5,8 +5,8 @@ TicTacToe created using [ebiten](https://github.com/hajimehoshi/ebiten) library.
 ## How to operate
 
 1. You right-clicking to a tile to mark.
-2. Repeat `1.` step by players.
-3. If you lose or win, you can reset the game by left-clicking
+2. Repeat `1.` step by player.
+3. If game is over, you can reset the game by left-clicking.
 
 ## Demo
 
