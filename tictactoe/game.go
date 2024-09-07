@@ -7,22 +7,52 @@ import (
 const (
 	ScreenWidth  = 420
 	ScreenHeight = 600
-
-	boardLength = 3
 )
 
 type Game struct {
-	board *Board
+	currentPlayer *Player
+	players       []*Player
+	board         *Board
 }
 
 func NewGame() *Game {
-	board := NewBoard(boardLength)
+	players := []*Player{
+		NewPlayer(tileCircle),
+		NewPlayer(tileCross),
+	}
 	return &Game{
-		board: board,
+		currentPlayer: players[0],
+		players:       players,
+		board:         NewBoard(),
 	}
 }
 
 func (g *Game) Update() error {
+	if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
+		mouseX, mouseY := ebiten.CursorPosition()
+
+		if g.board.IsPressed(mouseX, mouseY) {
+			row := (mouseX - boardMinX) / tileSize
+			column := (mouseY - boardMinY) / tileSize
+
+			if !g.board.IsValidEmptyTile(row, column) {
+				return nil
+			}
+
+			selected := g.board.tiles[row][column]
+			selected.Mark(g.currentPlayer.symbol)
+
+			if g.board.HasWinningLine() {
+				g.processWin(g.currentPlayer)
+			}
+			if g.board.IsAllMarked() {
+				g.processDraw()
+			}
+
+			g.changePlayer()
+		}
+	}
+
 	return nil
 }
 
@@ -42,4 +72,16 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	opts.GeoM.Translate(float64(x), float64(y))
 
 	screen.DrawImage(g.board.image, opts)
+}
+
+func (g *Game) processWin(winner *Player) {}
+
+func (g *Game) processDraw() {}
+
+func (g *Game) changePlayer() {
+	for _, player := range g.players {
+		if g.currentPlayer.symbol != player.symbol {
+			g.currentPlayer = player
+		}
+	}
 }

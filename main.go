@@ -9,8 +9,10 @@ import (
 
 func main() {
 	game := tictactoe.NewGame()
+
 	ebiten.SetWindowSize(tictactoe.ScreenWidth, tictactoe.ScreenHeight)
-	ebiten.SetWindowTitle("Tic Tac Toe (Ebitengine Demo)")
+	ebiten.SetWindowTitle("TicTacToe")
+
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
 	}
