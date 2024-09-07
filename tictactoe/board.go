@@ -26,7 +26,7 @@ func NewBoard() *Board {
 	for i := range tiles {
 		tiles[i] = make([]*Tile, boardLength)
 		for j := range tiles[i] {
-			tiles[i][j] = NewTile(tileEmpty)
+			tiles[i][j] = NewTile(symbolEmpty)
 		}
 	}
 	board := &Board{
@@ -52,6 +52,16 @@ func (b *Board) Draw() {
 			b.image.DrawImage(tile.image, opts)
 		}
 	}
+}
+
+func (b *Board) DrawWin(winner *Player) {
+	opts := &ebiten.DrawImageOptions{}
+	opts.GeoM.Translate(float64(boardMaxX), float64(boardMaxY))
+
+	winImage := ebiten.NewImage(boardWidth, boardHeight)
+	winImage.Fill(symbolColor(winner.symbol))
+
+	b.image.DrawImage(winImage, opts)
 }
 
 func (b *Board) HasWinningLine() bool {

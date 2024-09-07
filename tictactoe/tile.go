@@ -6,12 +6,10 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-type tileSymbol string
-
 const (
-	tileEmpty  tileSymbol = ""
-	tileCircle tileSymbol = "o"
-	tileCross  tileSymbol = "x"
+	symbolEmpty  symbol = ""
+	symbolCircle symbol = "o"
+	symbolCross  symbol = "x"
 
 	tileSize   = 80
 	tileMargin = 4
@@ -19,10 +17,10 @@ const (
 
 type Tile struct {
 	image  *ebiten.Image
-	symbol tileSymbol
+	symbol symbol
 }
 
-func NewTile(symbol tileSymbol) *Tile {
+func NewTile(symbol symbol) *Tile {
 	return &Tile{
 		symbol: symbol,
 		image:  ebiten.NewImage(tileSize, tileSize),
@@ -33,30 +31,22 @@ func (t *Tile) Draw() {
 	t.image.Fill(t.color())
 }
 
-func (t *Tile) Mark(symbol tileSymbol) {
+func (t *Tile) Mark(symbol symbol) {
 	t.symbol = symbol
 }
 
 func (t *Tile) IsEmpty() bool {
-	return t.symbol == tileEmpty
+	return t.symbol == symbolEmpty
 }
 
 func (t *Tile) IsCross() bool {
-	return t.symbol == tileCross
+	return t.symbol == symbolCross
 }
 
 func (t *Tile) IsCircle() bool {
-	return t.symbol == tileCircle
+	return t.symbol == symbolCircle
 }
 
 func (t *Tile) color() color.Color {
-	switch {
-	case t.IsEmpty():
-		return tileEmptyColor
-	case t.IsCircle():
-		return tileCircleColor
-	case t.IsCross():
-		return tileCrossColor
-	}
-	panic("not reach")
+	return symbolColor(t.symbol)
 }
